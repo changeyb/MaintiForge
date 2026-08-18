@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLang } from '../i18n';
-import { bayInfos, dayStats, deliveryPromises, kpis, rcaDistribution } from '../derive/metrics';
+import { bayInfos, dayStats, deliveryPromises, kpis, pocRoi, rcaDistribution } from '../derive/metrics';
 import { fmtH, fmtMoney, fmtTime, LOW_CONF_PLATES } from '../mock/data';
 import { KpiCard, Panel, Pill, SectionTitle, StatusDot } from '../components/ui';
 import EChart, { CHART_COLORS as C } from '../components/EChart';
@@ -129,6 +129,7 @@ function TrendChart() {
 export default function Dashboard() {
   const { t } = useLang();
   const k = useMemo(kpis, []);
+  const roi = useMemo(() => pocRoi(), []);
   const promise = useMemo(deliveryPromises, []);
 
   const delta = (v: number, goodWhenDown = true) => ({
@@ -150,6 +151,11 @@ export default function Dashboard() {
         <KpiCard label={t('kpi.activeRate')} value={k.activePct.toFixed(0)} unit="%" tone={k.activePct < 65 ? 'warn' : undefined} sub={k.activePct < 65 ? '⚠ <65%' : ''} />
         <KpiCard label={t('kpi.waitLoss')} value={fmtMoney(k.waitLoss)} tone="warn" delta="↑ 18%" deltaGood={false} sub={t('kpi.vsYesterday')} />
         <KpiCard label={t('kpi.revenue')} value={fmtMoney(k.revenue)} tone="ok" {...delta(k.revenueDeltaPct, false)} sub={t('kpi.vsYesterday')} />
+      </div>
+
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-amber-400/20 bg-amber-400/[0.04] px-4 py-2">
+        <span className="text-[12px] text-amber-200">{t('poc.roi.banner', { loss: roi.weekLoss.toLocaleString('zh-CN'), low: roi.targetLow.toLocaleString('zh-CN'), high: roi.targetHigh.toLocaleString('zh-CN') })}</span>
+        <Pill tone="accent">{t('poc.roi.badge')}</Pill>
       </div>
 
       {/* 交付承诺 */}

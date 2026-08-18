@@ -8,6 +8,7 @@ import Vehicles from './pages/Vehicles';
 import VehicleDetail from './pages/VehicleDetail';
 import Delays from './pages/Delays';
 import Analytics from './pages/Analytics';
+import Poc from './pages/Poc';
 
 const WEEKDAYS_ZH = ['日', '一', '二', '三', '四', '五', '六'];
 const WEEKDAYS_EN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -35,6 +36,7 @@ const NAV = [
   { to: '/vehicles', key: 'nav.vehicles', sub: 'nav.sub.vehicles' },
   { to: '/delays', key: 'nav.delays', sub: 'nav.sub.delays' },
   { to: '/analytics', key: 'nav.analytics', sub: 'nav.sub.analytics' },
+  { to: '/poc', key: 'nav.poc', sub: 'nav.sub.poc' },
 ] as const;
 
 export default function App() {
@@ -96,6 +98,7 @@ export default function App() {
           <Route path="/vehicle/:id" element={<VehicleDetail />} />
           <Route path="/delays" element={<Delays />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/poc" element={<Poc />} />
         </Routes>
       </main>
     </div>

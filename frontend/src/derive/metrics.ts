@@ -182,3 +182,13 @@ export function tatHistogram(): { bins: string[]; counts: number[] } {
   });
   return { bins: bins.map((b) => `${b}h`), counts };
 }
+
+export function pocRoi(): { weekLoss: number; intervenableLoss: number; targetLow: number; targetHigh: number } {
+  const weekLoss = totalWaitLossWeek();
+  // 可干预等待 = 人员调配 + 监管类延误（配件缺货受采购周期约束，不在 PoC 可承诺范围）
+  const intervenableLoss = Math.round(
+    DELAYS.filter((d) => d.cause === 'personnel' || d.cause === 'supervision').reduce((s, d) => s + d.delayH, 0) * WAIT_VALUE_PER_H,
+  );
+  // PoC 目标区间：可干预等待的 30–50%，第 2 周基线数据出来后锁定单一数字
+  return { weekLoss, intervenableLoss, targetLow: Math.round(intervenableLoss * 0.3), targetHigh: Math.round(intervenableLoss * 0.5) };
+}
