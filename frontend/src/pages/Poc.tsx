@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Diamond } from 'lucide-react';
 import { useLang } from '../i18n';
 import { kpis, pocRoi } from '../derive/metrics';
 import { DELAYS, LOW_CONF_PLATES, ON_SITE, SHIFT_STATS } from '../mock/data';
@@ -41,12 +42,12 @@ export default function Poc() {
         <Panel className="xl:col-span-8 p-0 overflow-hidden">
           <div className="p-4 pb-3">
             <SectionTitle>{t('poc.dataLineage')}</SectionTitle>
-            <div className="text-[12px] text-[#22354d]0">{t('poc.dataLineageIntro')}</div>
+            <div className="text-[12px] text-dim">{t('poc.dataLineageIntro')}</div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left border-collapse">
               <thead>
-                <tr className="border-y border-[#dfe6ee] bg-[#eef2f7] text-[11px] uppercase tracking-wide text-[#22354d]0">
+                <tr className="border-y border-[#dfe6ee] bg-[#eef2f7] text-[11px] uppercase tracking-wide text-dim">
                   <th className="px-4 py-2.5 font-medium">{t('poc.column.metric')}</th>
                   <th className="px-4 py-2.5 font-medium">{t('poc.column.source')}</th>
                   <th className="px-4 py-2.5 font-medium">{t('poc.column.current')}</th>
@@ -60,7 +61,7 @@ export default function Poc() {
                     <td className="px-4 py-3 text-[12px] leading-5 text-[#64748b]">{t(row.source)}</td>
                     <td className="px-4 py-3 whitespace-nowrap">
                       <span className="num text-[19px] font-bold text-[#128984]">{row.value}</span>
-                      <span className="ml-1 text-[11px] text-[#22354d]0">{t(row.unit)}</span>
+                      <span className="ml-1 text-[11px] text-dim">{t(row.unit)}</span>
                     </td>
                     <td className="px-4 py-3 text-[12px] leading-5 text-[#15803d]/80">{t(row.evidence)}</td>
                   </tr>
@@ -73,16 +74,26 @@ export default function Poc() {
         <Panel className="xl:col-span-4 border-[#ed9f18]/20 bg-[#ed9f18]/[0.04]">
           <SectionTitle right={<Pill tone="accent">{t('poc.roi.badge')}</Pill>}>{t('poc.roi.title')}</SectionTitle>
           <div className="num text-[38px] font-bold text-[#b47207] leading-none mt-5">
-            {roi.targetLow.toLocaleString('zh-CN')}–{roi.targetHigh.toLocaleString('zh-CN')}<span className="text-[14px] font-normal text-[#22354d]0 ml-1">{t('poc.unit.yuan')}</span>
+            {roi.targetLow.toLocaleString('zh-CN')}–{roi.targetHigh.toLocaleString('zh-CN')}<span className="text-[14px] font-normal text-dim ml-1">{t('poc.unit.yuan')}</span>
           </div>
           <div className="text-[12px] text-[#64748b] mt-3">{t('poc.roi.body')}</div>
-          <div className="flex items-center gap-2 mt-5 text-[12px] text-[#22354d]0">
-            <span className="w-2 h-2 rounded-full bg-[#ed9f18]" />
-            <span>{t('poc.metric.waitLoss')} {roi.weekLoss.toLocaleString('zh-CN')} {t('poc.unit.yuan')}</span>
-          </div>
-          <div className="flex items-center gap-2 mt-2 text-[12px] text-[#22354d]0">
-            <span className="w-2 h-2 rounded-full bg-[#128984]" />
-            <span>{t('poc.roi.intervenable')} {roi.intervenableLoss.toLocaleString('zh-CN')} {t('poc.unit.yuan')}</span>
+          {/* 损失 vs 可干预：双条对比 */}
+          <div className="mt-5 flex flex-col gap-2.5">
+            {[
+              { label: t('poc.metric.waitLoss'), v: roi.weekLoss, cls: 'bg-[#ed9f18]', dot: 'bg-[#ed9f18]' },
+              { label: t('poc.roi.intervenable'), v: roi.intervenableLoss, cls: 'bg-[#128984]', dot: 'bg-[#128984]' },
+            ].map((r) => (
+              <div key={r.label}>
+                <div className="flex items-center gap-2 text-[12px] text-dim">
+                  <span className={`w-2 h-2 rounded-full ${r.dot}`} />
+                  <span className="flex-1">{r.label}</span>
+                  <span className="num font-semibold text-[#3d5170]">{r.v.toLocaleString('zh-CN')} {t('poc.unit.yuan')}</span>
+                </div>
+                <div className="progress-track mt-1" style={{ height: 7 }}>
+                  <div className={`progress-fill ${r.cls}`} style={{ width: `${(r.v / Math.max(1, roi.weekLoss)) * 100}%` }} />
+                </div>
+              </div>
+            ))}
           </div>
         </Panel>
       </div>
@@ -96,7 +107,7 @@ export default function Poc() {
             <Pill tone="accent">{t('poc.acceptance.site')}</Pill>
           </div>
           <div className="rounded-lg border border-[#dfe6ee] overflow-hidden">
-            <div className="grid grid-cols-[1fr_auto_auto] gap-3 px-3 py-2 bg-[#eef2f7] text-[11px] text-[#22354d]0">
+            <div className="grid grid-cols-[1fr_auto_auto] gap-3 px-3 py-2 bg-[#eef2f7] text-[11px] text-dim">
               <span>{t('poc.acceptance.metric')}</span>
               <span>{t('poc.acceptance.threshold')}</span>
               <span>{t('poc.acceptance.defCol')}</span>
@@ -105,7 +116,7 @@ export default function Poc() {
               <div key={row.label} className="grid grid-cols-[1fr_auto_auto] items-center gap-3 px-3 py-3 border-t border-[#e2e8f0]">
                 <span className="text-[13px] text-[#22354d]">{t(row.label)}</span>
                 <span className="num text-[18px] font-bold text-[#15803d]">{t(row.target)}</span>
-                <span className="text-[11px] leading-4 text-[#22354d]0 text-right max-w-[200px]">{t(row.def)}</span>
+                <span className="text-[11px] leading-4 text-dim text-right max-w-[200px]">{t(row.def)}</span>
               </div>
             ))}
           </div>
@@ -115,10 +126,10 @@ export default function Poc() {
         <Panel className="xl:col-span-5">
           <SectionTitle right={<Pill tone="dim">{t('poc.roadmap.badge')}</Pill>}>{t('poc.roadmap.title')}</SectionTitle>
           <div className="flex flex-col gap-3 text-[13px] text-[#3d5170]">
-            <div className="flex items-center gap-2"><span className="text-[#128984]">◆</span><span>{t('poc.roadmap.item.badge')}</span></div>
-            <div className="flex items-center gap-2"><span className="text-[#128984]">◆</span><span>{t('poc.roadmap.item.attendance')}</span></div>
-            <div className="flex items-center gap-2"><span className="text-[#128984]">◆</span><span>{t('poc.roadmap.item.hours')}</span></div>
-            <div className="flex items-center gap-2"><span className="text-[#128984]">◆</span><span>{t('poc.roadmap.item.ranking')}</span></div>
+            <div className="flex items-center gap-2"><Diamond size={11} className="text-teal" /><span>{t('poc.roadmap.item.badge')}</span></div>
+            <div className="flex items-center gap-2"><Diamond size={11} className="text-teal" /><span>{t('poc.roadmap.item.attendance')}</span></div>
+            <div className="flex items-center gap-2"><Diamond size={11} className="text-teal" /><span>{t('poc.roadmap.item.hours')}</span></div>
+            <div className="flex items-center gap-2"><Diamond size={11} className="text-teal" /><span>{t('poc.roadmap.item.ranking')}</span></div>
           </div>
           <div className="mt-5 rounded-lg border border-[#94a3b8]/30 bg-[#94a3b8]/[0.08] px-3 py-3 text-[12px] leading-5 text-[#64748b]">{t('poc.roadmap.compliance')}</div>
         </Panel>

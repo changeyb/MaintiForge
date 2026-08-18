@@ -8,11 +8,12 @@ export function Panel({ children, className = '', onClick }: { children: ReactNo
   );
 }
 
-export function SectionTitle({ children, right }: { children: ReactNode; right?: ReactNode }) {
+export function SectionTitle({ children, right, icon }: { children: ReactNode; right?: ReactNode; icon?: ReactNode }) {
   return (
     <div className="flex items-center justify-between mb-3">
       <div className="flex items-center gap-2 text-[13px] font-semibold tracking-wide text-ink">
         <span className="w-1 h-3.5 rounded bg-teal inline-block" />
+        {icon && <span className="text-teal inline-flex [&>svg]:w-4 [&>svg]:h-4">{icon}</span>}
         {children}
       </div>
       {right}
@@ -31,22 +32,41 @@ export function KpiCard({ label, value, unit, delta, deltaGood, sub, tone }: {
     <div className="panel px-4 py-3 flex flex-col justify-between min-h-[86px]">
       <div className="text-[12px] text-dim">{label}</div>
       <div className="flex items-baseline gap-1.5">
-        <span className={`num text-[30px] leading-none font-bold ${tone ? TONE[tone] : 'text-ink'}`}>{value}</span>
-        {unit && <span className="text-[12px] text-faint">{unit}</span>}
+        <span className={`num text-[34px] leading-none font-bold tracking-tight ${tone ? TONE[tone] : 'text-ink'}`}>{value}</span>
+        {unit && <span className="text-[12px] text-dim">{unit}</span>}
       </div>
       <div className="flex items-center gap-2 text-[11px]">
         {delta && (
-          <span className={deltaGood === undefined ? 'text-faint' : deltaGood ? 'text-ok-ink' : 'text-bad'}>{delta}</span>
+          <span className={deltaGood === undefined ? 'text-dim' : deltaGood ? 'text-ok-ink' : 'text-bad'}>{delta}</span>
         )}
-        {sub && <span className="text-faint">{sub}</span>}
+        {sub && <span className="text-dim">{sub}</span>}
       </div>
     </div>
   );
 }
 
+// 货币大数字：货币符号降字号降基线，避免与数字抢视觉重量
+export function Money({ value, className = '', symbolClass = '' }: { value: string; className?: string; symbolClass?: string }) {
+  const m = value.match(/^([A-Za-z$]+)(.*)$/);
+  if (!m) return <span className={className}>{value}</span>;
+  return (
+    <span className={className}>
+      <span className={`text-[0.55em] font-semibold align-baseline mr-[1px] ${symbolClass}`}>{m[1]}</span>
+      {m[2]}
+    </span>
+  );
+}
+
+// 中性计数徽章（×n）：不用语义色，避免与红/绿状态冲突
+export function CountBadge({ n }: { n: number }) {
+  return (
+    <span className="num inline-flex items-center px-1.5 py-px rounded-md border border-line bg-soft text-ink2 text-[11px] font-semibold">×{n}</span>
+  );
+}
+
 export function StatusDot({ tone, pulse }: { tone: 'ok' | 'warn' | 'bad' | 'idle'; pulse?: boolean }) {
   const c = { ok: 'bg-ok', warn: 'bg-accent', bad: 'bg-bad', idle: 'bg-idle' }[tone];
-  return <span className={`inline-block w-2 h-2 rounded-full ${c} ${pulse ? 'live-dot' : ''}`} />;
+  return <span className={`inline-block w-2 h-2 rounded-full shrink-0 ${c} ${pulse ? 'live-dot' : ''}`} />;
 }
 
 export function Pill({ children, tone = 'dim' }: { children: ReactNode; tone?: 'ok' | 'warn' | 'bad' | 'dim' | 'accent' }) {
@@ -57,7 +77,7 @@ export function Pill({ children, tone = 'dim' }: { children: ReactNode; tone?: '
     dim: 'bg-idle/10 text-dim border-idle/40',
     accent: 'bg-teal/10 text-teal border-teal/30',
   }[tone];
-  return <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[11px] ${styles}`}>{children}</span>;
+  return <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[11px] [&>svg]:w-3 [&>svg]:h-3 ${styles}`}>{children}</span>;
 }
 
 export function ProgressBar({ pct, tone = 'accent', height = 8 }: { pct: number; tone?: 'ok' | 'warn' | 'bad' | 'accent' | 'idle'; height?: number }) {
@@ -77,5 +97,5 @@ export function RiskIcon({ risk }: { risk: 'ok' | 'tight' | 'risk' | 'done' }) {
 }
 
 export function Empty({ children }: { children: ReactNode }) {
-  return <div className="text-faint text-[13px] py-6 text-center">{children}</div>;
+  return <div className="text-dim text-[13px] py-6 text-center">{children}</div>;
 }

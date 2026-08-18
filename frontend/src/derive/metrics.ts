@@ -184,6 +184,38 @@ export function tatHistogram(): { bins: string[]; counts: number[] } {
   return { bins: bins.map((b) => `${b}h`), counts };
 }
 
+// ---------------------------------------------------------------- 驾驶舱图表
+
+// 今日时间构成：口径与 kpis().activePct 一致（在场且已分工位的车辆）
+export function todayTimeComposition(): { work: number; wait: number; other: number } {
+  const active = ON_SITE.filter((v) => v.bayId);
+  return {
+    work: active.reduce((s, v) => s + v.workMin, 0),
+    wait: active.reduce((s, v) => s + v.waitMin, 0),
+    other: active.reduce((s, v) => s + v.otherMin, 0),
+  };
+}
+
+// 近 7 天每日等待损失（S$）：由延误案件按天聚合
+export function dailyDelayLoss(): { date: Date; value: number }[] {
+  return [6, 5, 4, 3, 2, 1, 0].map((off) => {
+    const d = at(off, 0);
+    const value = Math.round(
+      DELAYS.filter((x) => x.when.toDateString() === d.toDateString()).reduce((s, x) => s + x.delayH, 0) * WAIT_VALUE_PER_H,
+    );
+    return { date: d, value };
+  });
+}
+
+// 近 7 天每日延误工时：由延误案件按天聚合
+export function dailyDelayHours(): { date: Date; hours: number }[] {
+  return [6, 5, 4, 3, 2, 1, 0].map((off) => {
+    const d = at(off, 0);
+    const hours = +DELAYS.filter((x) => x.when.toDateString() === d.toDateString()).reduce((s, x) => s + x.delayH, 0).toFixed(1);
+    return { date: d, hours };
+  });
+}
+
 export function pocRoi(): { weekLoss: number; intervenableLoss: number; targetLow: number; targetHigh: number } {
   const weekLoss = totalWaitLossWeek();
   // 可干预等待 = 人员调配 + 监管类延误（配件缺货受采购周期约束，不在 PoC 可承诺范围）

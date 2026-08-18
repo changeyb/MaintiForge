@@ -1,5 +1,6 @@
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Maximize } from 'lucide-react';
 import { useLang } from './i18n';
 import { NOW } from './mock/data';
 import Dashboard from './pages/Dashboard';
@@ -49,7 +50,7 @@ export default function App() {
             <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-teal to-primary-deep flex items-center justify-center text-[15px] font-black text-white">K</div>
             <div>
               <div className="text-[14px] font-bold leading-tight text-white whitespace-nowrap">{t('app.title')}</div>
-              <div className="text-[10px] text-white/50 leading-tight whitespace-nowrap">{t('app.subtitle')}</div>
+              <div className="text-[10px] text-white/65 leading-tight whitespace-nowrap">{t('app.subtitle')}</div>
             </div>
           </div>
           <nav className="flex items-center gap-1 ml-4">
@@ -65,7 +66,7 @@ export default function App() {
                 }
               >
                 {t(n.key as any)}
-                <span className="ml-1.5 text-[10px] opacity-60">{t(n.sub as any)}</span>
+                <span className="ml-1.5 text-[10px] opacity-75">{t(n.sub as any)}</span>
               </NavLink>
             ))}
           </nav>
@@ -83,9 +84,9 @@ export default function App() {
             </button>
             <button
               onClick={() => (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen())}
-              className="px-2.5 py-1 rounded border border-white/25 text-[12px] text-white/80 hover:border-white/60 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded border border-white/25 text-[12px] text-white/80 hover:border-white/60 hover:text-white transition-colors"
             >
-              ⛶ {t('common.fullscreen')}
+              <Maximize size={12} /> {t('common.fullscreen')}
             </button>
           </div>
         </div>
