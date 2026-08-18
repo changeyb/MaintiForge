@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-08-18T11:44:05.015695+00:00",
+  "generated_at_utc": "2026-08-18T13:44:03.539053+00:00",
   "config": "configs/user_manual.toml",
   "base_url": "http://47.97.66.237",
   "viewport": {
@@ -29,8 +29,8 @@
       "path": "docs/screenshots/01-dashboard.png",
       "width": 1680,
       "height": 1050,
-      "bytes": 183932,
-      "sha256": "5eb9684019b48212a9f862b81ccdeb9320092c1d189e76b4e43a1305b1ddc42c",
+      "bytes": 209252,
+      "sha256": "7ceec6d01a8c34e87fdf6d6ffed18f7791a766a08daf9a6d297e7b18427b4fa3",
       "name": "01-dashboard",
       "url": "http://47.97.66.237/#/"
     },
@@ -38,8 +38,8 @@
       "path": "docs/screenshots/02-floor.png",
       "width": 1680,
       "height": 1050,
-      "bytes": 197038,
-      "sha256": "191f04564cfc98ee9442ab54a7e69f603abc2345e05961bbf5d867bbf01683bb",
+      "bytes": 178455,
+      "sha256": "41a8de81ceec4fc4b73ec68935d935810851c5cbe596627414d01c64f5d78309",
       "name": "02-floor",
       "url": "http://47.97.66.237/#/floor"
     },
@@ -47,8 +47,8 @@
       "path": "docs/screenshots/03-vehicles.png",
       "width": 1680,
       "height": 1050,
-      "bytes": 105902,
-      "sha256": "a340c5dd030716d382c88c38301deff53bbb7f6c3cfcd0e280166e3280377c98",
+      "bytes": 176356,
+      "sha256": "aa7552fde0b6f46bab0a65a02a3abf0ca564533a9825362767440e8e887328a6",
       "name": "03-vehicles",
       "url": "http://47.97.66.237/#/vehicles"
     },
@@ -56,8 +56,8 @@
       "path": "docs/screenshots/04-vehicle-paint.png",
       "width": 1680,
       "height": 1050,
-      "bytes": 135836,
-      "sha256": "27c3b262e4c0b508e6b917d1fc823d738e33b6d2a713d953bda93003a8d81cbf",
+      "bytes": 143843,
+      "sha256": "ece0b39209457e074b9c7b7ee596cdc4bbb706cddf6c50dd9e50ef6ff2583801",
       "name": "04-vehicle-paint",
       "url": "http://47.97.66.237/#/vehicle/V-1"
     },
@@ -65,8 +65,8 @@
       "path": "docs/screenshots/05-vehicle-brake.png",
       "width": 1680,
       "height": 1050,
-      "bytes": 114147,
-      "sha256": "7ccf929de650268a8d5b5131de3aa0ead8a65d9d89adc3ed9289d32084b00af5",
+      "bytes": 124319,
+      "sha256": "3518261327ac88f3f719fe34e5fd6de4df91a511ac18eb3e91dc413d683a0d72",
       "name": "05-vehicle-brake",
       "url": "http://47.97.66.237/#/vehicle/V-2"
     },
@@ -74,8 +74,8 @@
       "path": "docs/screenshots/06-delays.png",
       "width": 1680,
       "height": 1050,
-      "bytes": 190167,
-      "sha256": "8a78c6d52406a4ee4674e761dd08956d9c31894b84e1837fdad8834d3d106267",
+      "bytes": 229971,
+      "sha256": "3bbdb2eb784bc5083597b42bb23a14abda4de1496582bd7a66c21cc9598ce5f8",
       "name": "06-delays",
       "url": "http://47.97.66.237/#/delays"
     },
@@ -83,8 +83,8 @@
       "path": "docs/screenshots/07-analytics.png",
       "width": 1680,
       "height": 1050,
-      "bytes": 136258,
-      "sha256": "4749460c01bb78c60e55b024de6566ff545531d0dfc37329104ea446dc5da945",
+      "bytes": 138934,
+      "sha256": "87d0fda1c65a6aec2f7d107d669257c527b0f30cc2dfc7043586baa728810583",
       "name": "07-analytics",
       "url": "http://47.97.66.237/#/analytics"
     },
@@ -92,8 +92,8 @@
       "path": "docs/screenshots/08-poc.png",
       "width": 1680,
       "height": 1050,
-      "bytes": 246097,
-      "sha256": "896f23be259f3a7a7ec7a2794a2734ab67d73924330901a0cad11117d0b033cf",
+      "bytes": 245474,
+      "sha256": "964c1e6ffe27ae3b75aaef6a3af80b3be10e2b6c5eb26de425f4ba71bdb983aa",
       "name": "08-poc",
       "url": "http://47.97.66.237/#/poc"
     }
