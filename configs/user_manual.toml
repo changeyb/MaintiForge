@@ -38,7 +38,7 @@ min = 4
 
 [[content_gates]]
 name = "story_vehicle_mentions"
-pattern = '闽D·7R663|闽D·3M220'
+pattern = 'YN7663X|YQ3220A'
 min = 2
 
 [[routes]]
