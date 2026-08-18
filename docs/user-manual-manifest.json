@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-18T08:56:13.943938+00:00",
+  "config": "configs/user_manual.toml",
+  "base_url": "http://47.97.66.237",
+  "viewport": {
+    "width": 1680,
+    "height": 1050
+  },
+  "inputs": {
+    "config": {
+      "path": "configs/user_manual.toml",
+      "bytes": 1680,
+      "sha256": "3ede609bbe854126cef0159f2efb1dfa305742c1948126e681ce159b694ee206"
+    },
+    "template": {
+      "path": "scripts/templates/user_manual.md",
+      "bytes": 9442,
+      "sha256": "707030100058948f820c6d877183278c6b05c87cc94f6cb6c8237e9fefa15371"
+    }
+  },
+  "manual": {
+    "path": "docs/用户手册.md",
+    "bytes": 9596,
+    "sha256": "1c8875c9d7ab8a5b97a2622e95f0d89b82893865919c849ded81ed68b2beaf9e"
+  },
+  "screenshots": [
+    {
+      "path": "docs/screenshots/01-dashboard.png",
+      "width": 1680,
+      "height": 1050,
+      "bytes": 245637,
+      "sha256": "409ceb35a0bb0a7cd862df7b254374a4d68c3ca11e467645d6f4313a2a7b2071",
+      "name": "01-dashboard",
+      "url": "http://47.97.66.237/#/"
+    },
+    {
+      "path": "docs/screenshots/02-floor.png",
+      "width": 1680,
+      "height": 1050,
+      "bytes": 169730,
+      "sha256": "85ac5925f9e1abcc2e947cda6954e730192e8b57cfb2a9a744fa691cbabcd0ef",
+      "name": "02-floor",
+      "url": "http://47.97.66.237/#/floor"
+    },
+    {
+      "path": "docs/screenshots/03-vehicles.png",
+      "width": 1680,
+      "height": 1050,
+      "bytes": 119987,
+      "sha256": "996887dbf6fc6c1f98246903048827426f6f7af9717c7d2cf7415109ef4dadab",
+      "name": "03-vehicles",
+      "url": "http://47.97.66.237/#/vehicles"
+    },
+    {
+      "path": "docs/screenshots/04-vehicle-paint.png",
+      "width": 1680,
+      "height": 1050,
+      "bytes": 164530,
+      "sha256": "c44ead74e46eaf17d7ebf56c975275282fd29850502e856f0f2c187bf7f05cee",
+      "name": "04-vehicle-paint",
+      "url": "http://47.97.66.237/#/vehicle/V-1"
+    },
+    {
+      "path": "docs/screenshots/05-vehicle-brake.png",
+      "width": 1680,
+      "height": 1050,
+      "bytes": 139625,
+      "sha256": "0d4394f63c4edc68fa2f94a615c661e77593925cb860b3cb2432e380713c418a",
+      "name": "05-vehicle-brake",
+      "url": "http://47.97.66.237/#/vehicle/V-2"
+    },
+    {
+      "path": "docs/screenshots/06-delays.png",
+      "width": 1680,
+      "height": 1050,
+      "bytes": 224158,
+      "sha256": "8c7567aebcac3e8c6503c75b309e57abcdbccbb2a82b08a87bf442da969ea581",
+      "name": "06-delays",
+      "url": "http://47.97.66.237/#/delays"
+    },
+    {
+      "path": "docs/screenshots/07-analytics.png",
+      "width": 1680,
+      "height": 1050,
+      "bytes": 158114,
+      "sha256": "32547383f835f67a044d13fe6162dc7ae582bd75e7807cdd63459808ffb5adb3",
+      "name": "07-analytics",
+      "url": "http://47.97.66.237/#/analytics"
+    },
+    {
+      "path": "docs/screenshots/08-poc.png",
+      "width": 1680,
+      "height": 1050,
+      "bytes": 295547,
+      "sha256": "02f910b6b61a8afa668b5d5bc737a4f31cf53c09b4094752a217151f84a4af94",
+      "name": "08-poc",
+      "url": "http://47.97.66.237/#/poc"
+    }
+  ],
+  "checks": {
+    "content_gates": {
+      "image_refs": 9,
+      "online_urls": 22,
+      "sections": 4,
+      "story_vehicle_mentions": 6
+    },
+    "reverse_check_bytes": 36428,
+    "visual_review": "required_after_capture"
+  }
+}

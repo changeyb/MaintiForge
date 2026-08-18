@@ -10,10 +10,13 @@
 ## 仓库结构
 
 ```
-frontend/          # React 前端 Demo（全部代码在此）
+frontend/          # React 前端 Demo（业务代码在此）
 ├── src/mock/      # 事件底座 mock（固定种子，字段对齐方案 6.1 数据对象）
 ├── src/derive/    # 指标推导层（口径对齐方案 6.3，数字由事件计算）
 └── src/pages/     # 6 个页面：驾驶舱 / 实时看板 / 车辆进度 / 时间线 / 延误根因 / 运营分析
+configs/           # 可复用流程配置，例如用户手册的线上地址、路由和验收阈值
+scripts/           # 生成/验收脚本
+docs/              # 客户手册、截图和 SHA-256 manifest
 ```
 
 ## 快速开始
@@ -25,6 +28,26 @@ npm run dev        # http://localhost:5173
 ```
 
 详见 [frontend/README.md](frontend/README.md)。
+
+## 用户手册生成
+
+功能或线上页面变更并完成部署后，使用仓库根目录的固定入口重新生成客户手册、线上截图和 SHA-256 manifest：
+
+```bash
+python3 scripts/generate_user_manual.py --config configs/user_manual.toml
+```
+
+该命令会按配置访问线上站点的 8 个路由，使用 `1680×1050` 中文视窗截图，渲染 `scripts/templates/user_manual.md`，检查图片引用、尺寸、文件大小、客户向禁用词和关键内容门禁，并用错误端口截图做小文件反向验证。生成后仍需人工目视复核截图内容，脚本不会把自动检查当成视觉验收。
+
+默认配置固定使用已部署的 `http://47.97.66.237`，并拒绝 `localhost`/回环地址，避免把本地页面误当成客户手册截图。
+
+只做不联网、不写文件的复核：
+
+```bash
+python3 scripts/generate_user_manual.py --config configs/user_manual.toml --check-only
+```
+
+修改站点地址、路由、截图阈值或输出路径时，先改 `configs/user_manual.toml`；手册正文改 `scripts/templates/user_manual.md`，不要直接改生成文件 `docs/用户手册.md`。可追溯清单写入 `docs/user-manual-manifest.json`。
 
 ## 特性
 

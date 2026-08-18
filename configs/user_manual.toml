@@ -1,0 +1,82 @@
+base_url = "http://47.97.66.237"
+manual = "docs/用户手册.md"
+template = "scripts/templates/user_manual.md"
+manifest = "docs/user-manual-manifest.json"
+screenshot_prefix = "screenshots/"
+min_bytes = 100000
+min_image_refs = 8
+allow_local_url = false
+forbidden_terms = ["localhost", "mock", "待商务确认", "暗卷", "file://"]
+
+[capture]
+chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+width = 1680
+height = 1050
+disable_gpu = true
+hide_scrollbars = true
+
+[reverse_check]
+enabled = true
+url = "http://47.97.66.237:9999/"
+output = "/tmp/ktt-user-manual-bad.png"
+max_bytes = 100000
+
+[[content_gates]]
+name = "image_refs"
+pattern = '^!\['
+min = 8
+
+[[content_gates]]
+name = "online_urls"
+pattern = "{{BASE_URL}}"
+min = 6
+
+[[content_gates]]
+name = "sections"
+pattern = '^## '
+min = 4
+
+[[content_gates]]
+name = "story_vehicle_mentions"
+pattern = '闽D·7R663|闽D·3M220'
+min = 2
+
+[[routes]]
+name = "01-dashboard"
+path = "/#/"
+output = "docs/screenshots/01-dashboard.png"
+
+[[routes]]
+name = "02-floor"
+path = "/#/floor"
+output = "docs/screenshots/02-floor.png"
+
+[[routes]]
+name = "03-vehicles"
+path = "/#/vehicles"
+output = "docs/screenshots/03-vehicles.png"
+
+[[routes]]
+name = "04-vehicle-paint"
+path = "/#/vehicle/V-1"
+output = "docs/screenshots/04-vehicle-paint.png"
+
+[[routes]]
+name = "05-vehicle-brake"
+path = "/#/vehicle/V-2"
+output = "docs/screenshots/05-vehicle-brake.png"
+
+[[routes]]
+name = "06-delays"
+path = "/#/delays"
+output = "docs/screenshots/06-delays.png"
+
+[[routes]]
+name = "07-analytics"
+path = "/#/analytics"
+output = "docs/screenshots/07-analytics.png"
+
+[[routes]]
+name = "08-poc"
+path = "/#/poc"
+output = "docs/screenshots/08-poc.png"

@@ -4,7 +4,7 @@
 
 ## 项目是什么
 
-KTT 6Terusan 维修车间数字化系统的**前端演示 Demo**（无后端、无真实数据）。目的是向客户/老板演示看板设计，不是生产系统。所有代码在 `frontend/`。
+KTT 6Terusan 维修车间数字化系统的**前端演示 Demo**（无后端、无真实数据）。目的是向客户/老板演示看板设计，不是生产系统。业务代码在 `frontend/`；客户手册生成工具在根目录 `scripts/`、`configs/` 和 `docs/`。
 
 - 技术栈：React 18 + TypeScript + Vite 5 + Tailwind CSS v4（`@tailwindcss/vite`）+ ECharts 5 + react-router-dom v6（HashRouter）
 - 视觉：深色大屏风。颜色语义全局统一：🟢 作业中/正常 · 🟡 等待/紧张 · 🔴 超时/异常/风险 · ⚫ 空闲 · 斜纹/置灰 停用
@@ -19,6 +19,30 @@ npm run build    # tsc -b && vite build；提交前必须无 error
 ```
 
 没有测试框架、没有 lint 配置；验收标准 = `npm run build` 通过 + 页面截图确认。
+
+## 用户手册生成与验收（重要）
+
+用户手册不是手工复制截图的临时产物。功能或页面变更并完成线上部署后，必须从仓库根目录运行固定入口：
+
+```bash
+python3 scripts/generate_user_manual.py --config configs/user_manual.toml
+```
+
+这条命令会：
+
+- 从配置的已部署 URL 截取 8 个 HashRouter 路由，统一使用中文 `1680×1050` 视窗；默认配置禁止 `localhost` 和回环地址。
+- 用 `scripts/templates/user_manual.md` 渲染 `docs/用户手册.md`；不要直接编辑生成文件，正文改模板，地址/路由/阈值改 `configs/user_manual.toml`。
+- 验证 Markdown 图片引用必须是 `screenshots/*.png` 相对路径，图片存在、尺寸正确、大小超过阈值，且客户向手册不含内部禁用词。
+- 对错误端口执行小文件反向验证并自动删除临时坏图；失败时必须保留错误信息，不得用 `|| true` 绕过。
+- 将手册、截图、配置和模板的 SHA-256 写入 `docs/user-manual-manifest.json`，用于变更后的可追溯复核。
+
+只做不联网、不写文件的复核：
+
+```bash
+python3 scripts/generate_user_manual.py --config configs/user_manual.toml --check-only
+```
+
+`--check-only` 必须通过后，仍要人工目视检查 8 张当前截图：页面完整、中文界面、关键数字和路由与 `PoC_提案.md` 第 3、5 节一致。自动门禁通过不等于视觉验收通过。
 
 ## 架构纪律（重要）
 
@@ -46,7 +70,7 @@ src/i18n.tsx            # 唯一文案出口
 - ✅ "待确认"是合法结论，证据不足时不硬编根因
 - ❌ 人脸识别相关 UI 默认不做（方案一期不启用）
 
-## 验证方式
+## 前端验证方式
 
 构建通过后，用无头 Chrome 截图自查（dev server 需先启动）：
 
