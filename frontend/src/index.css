@@ -1,17 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #070b16;
-  --color-panel: #0e1526;
-  --color-panel2: #131c33;
-  --color-line: #1e2b47;
-  --color-ink: #e6edf7;
-  --color-dim: #8b98b3;
-  --color-accent: #38bdf8;
-  --color-ok: #34d399;
-  --color-warn: #fbbf24;
-  --color-bad: #f87171;
-  --color-idle: #64748b;
+  /* 商务科技风：冷灰白底 + 深蓝图示 + 青绿辅助 + 橙黄强调 */
+  --color-bg: #f3f6fa;
+  --color-panel: #ffffff;
+  --color-soft: #eef2f7;
+  --color-line: #dfe6ee;
+  --color-ink: #22354d;
+  --color-ink2: #3d5170;
+  --color-dim: #64748b;
+  --color-faint: #94a3b8;
+  --color-primary: #1e3a5a;
+  --color-primary-deep: #16304d;
+  --color-teal: #128984;
+  --color-accent: #ed9f18;
+  --color-accent-ink: #b47207;
+  --color-ok: #16a34a;
+  --color-ok-ink: #15803d;
+  --color-bad: #dc2626;
+  --color-idle: #94a3b8;
   --font-num: "DIN Alternate", "Bahnschrift", "Segoe UI", system-ui, sans-serif;
 }
 
@@ -26,15 +33,15 @@ body {
 .num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
 
 .panel {
-  background: linear-gradient(180deg, rgba(21,31,55,.75), rgba(13,20,38,.9));
+  background: var(--color-panel);
   border: 1px solid var(--color-line);
   border-radius: 10px;
 }
 
-.panel-glow { box-shadow: 0 0 0 1px rgba(56,189,248,.06), 0 8px 30px rgba(0,0,0,.35); }
+.panel-glow { box-shadow: 0 1px 2px rgba(30, 58, 90, .05), 0 10px 28px rgba(30, 58, 90, .07); }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-thumb { background: #243453; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 
 @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
@@ -42,5 +49,5 @@ body {
 
 @keyframes ticker { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
 
-.progress-track { background: #1a2540; border-radius: 999px; overflow: hidden; }
+.progress-track { background: #e6ebf2; border-radius: 999px; overflow: hidden; }
 .progress-fill { height: 100%; border-radius: 999px; transition: width .6s ease; }

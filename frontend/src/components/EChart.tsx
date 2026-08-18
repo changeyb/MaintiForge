@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 
 export const CHART_COLORS = {
-  accent: '#38bdf8', ok: '#34d399', warn: '#fbbf24', bad: '#f87171', dim: '#64748b',
-  grid: '#1e2b47', text: '#8b98b3',
+  accent: '#128984', primary: '#1e3a5a', ok: '#16a34a', warn: '#ed9f18', bad: '#dc2626', dim: '#94a3b8',
+  grid: '#e2e8f0', text: '#64748b',
 };
 
 export default function EChart({ option, height = 220, onClick }: { option: echarts.EChartsOption; height?: number; onClick?: (params: any) => void }) {

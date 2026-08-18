@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------
 import {
   ALL_VISITS, BAYS, DELAYS, NOW, ON_SITE, PAST_DAYS, TODAY_VISITS, WAIT_VALUE_PER_H,
-  at, isToday, type BayId, type Cause, type Visit,
+  at, isToday, type BayId, type Cause, type FloorId, type Visit,
 } from '../mock/data';
 
 const tatOf = (v: Visit) => v.exitAt ? (v.exitAt.getTime() - v.entryAt.getTime()) / 60000 : null;
@@ -106,6 +106,7 @@ export type BayState = 'working' | 'waiting' | 'idle' | 'overtime';
 
 export interface BayInfo {
   id: BayId;
+  floor: FloorId;
   cam: string;
   camHealth: 'ok' | 'warn';
   state: BayState;
@@ -117,7 +118,7 @@ export interface BayInfo {
 }
 
 export function bayInfos(): BayInfo[] {
-  const patrolled: Record<BayId, boolean> = { mech1: true, mech2: true, body: true, paint: false, qc: false };
+  const patrolled: Record<BayId, boolean> = { e1: true, e2: true, c1: true, h1: false, p1: true, p2: true, m1: false, qc: false };
   return BAYS.map((b) => {
     const v = ON_SITE.find((x) => x.bayId === b.id) ?? null;
     let state: BayState = 'idle';
@@ -130,7 +131,7 @@ export function bayInfos(): BayInfo[] {
     } else {
       idleH = 1.2;
     }
-    return { id: b.id, cam: b.cam, camHealth: b.camHealth, state, visit: v, usedH, targetH, idleH, patrolled: patrolled[b.id] };
+    return { id: b.id, floor: b.floor, cam: b.cam, camHealth: b.camHealth, state, visit: v, usedH, targetH, idleH, patrolled: patrolled[b.id] };
   });
 }
 

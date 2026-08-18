@@ -12,9 +12,9 @@ function Composition({ work, wait, other }: { work: number; wait: number; other:
   const { t } = useLang();
   const total = Math.max(1, work + wait + other);
   const segs = [
-    { label: t('vd.activeWork'), min: work, cls: 'bg-emerald-400', text: 'text-emerald-300' },
-    { label: t('vd.waitParts'), min: wait, cls: 'bg-amber-400', text: 'text-amber-300' },
-    { label: t('vd.other'), min: other, cls: 'bg-slate-500', text: 'text-slate-400' },
+    { label: t('vd.activeWork'), min: work, cls: 'bg-[#16a34a]', text: 'text-[#15803d]' },
+    { label: t('vd.waitParts'), min: wait, cls: 'bg-[#ed9f18]', text: 'text-[#b47207]' },
+    { label: t('vd.other'), min: other, cls: 'bg-[#94a3b8]', text: 'text-[#64748b]' },
   ];
   return (
     <div>
@@ -25,9 +25,9 @@ function Composition({ work, wait, other }: { work: number; wait: number; other:
         {segs.map((s) => (
           <div key={s.label} className="flex items-center gap-2 text-[12px]">
             <span className={`w-2.5 h-2.5 rounded-sm ${s.cls}`} />
-            <span className="text-slate-400">{s.label}</span>
+            <span className="text-[#64748b]">{s.label}</span>
             <span className={`num font-bold ${s.text}`}>{fmtH(s.min)}</span>
-            <span className="text-slate-600 num">{Math.round((s.min / total) * 100)}%</span>
+            <span className="text-[#94a3b8] num">{Math.round((s.min / total) * 100)}%</span>
           </div>
         ))}
       </div>
@@ -40,7 +40,7 @@ export default function VehicleDetail() {
   const nav = useNavigate();
   const { t } = useLang();
   const v = ALL_VISITS.find((x) => x.id === id);
-  if (!v) return <div className="text-slate-400 p-10">Vehicle not found. <button className="text-sky-400" onClick={() => nav(-1)}>← {t('vd.back')}</button></div>;
+  if (!v) return <div className="text-[#64748b] p-10">Vehicle not found. <button className="text-[#128984]" onClick={() => nav(-1)}>← {t('vd.back')}</button></div>;
 
   const elapsedMin = v.exitAt
     ? (v.exitAt.getTime() - v.entryAt.getTime()) / 60000
@@ -54,7 +54,7 @@ export default function VehicleDetail() {
 
   return (
     <div className="flex flex-col gap-4">
-      <button onClick={() => nav(-1)} className="text-[13px] text-slate-400 hover:text-sky-300 self-start">← {t('vd.back')}</button>
+      <button onClick={() => nav(-1)} className="text-[13px] text-[#64748b] hover:text-[#128984] self-start">← {t('vd.back')}</button>
 
       {/* 头部：车辆 + 进度 */}
       <Panel>
@@ -62,36 +62,36 @@ export default function VehicleDetail() {
           <div>
             <div className="flex items-center gap-3">
               <span className="num text-[26px] font-black">{v.plate}</span>
-              <span className="text-slate-400 text-[14px]">{v.model}</span>
+              <span className="text-[#64748b] text-[14px]">{v.model}</span>
               {diffMin > 20 ? <Pill tone="bad">🔴 {t('vehicles.overTarget')}</Pill> : diffMin > 0 ? <Pill tone="warn">🟡 {t('vehicles.margin')} {fmtH(-diffMin)}</Pill> : <Pill tone="ok">🟢 OK</Pill>}
             </div>
-            <div className="text-[13px] text-slate-400 mt-1.5 flex items-center gap-4">
+            <div className="text-[13px] text-[#64748b] mt-1.5 flex items-center gap-4">
               <span>{v.wo} · {t(`task.${v.taskType}` as any)}</span>
-              <span>{t('vd.orderAmount')} <b className="num text-slate-200">{fmtMoney(v.amount)}</b></span>
+              <span>{t('vd.orderAmount')} <b className="num text-[#22354d]">{fmtMoney(v.amount)}</b></span>
               <span>{t('vd.techs')}: {v.techs.length ? v.techs.join(' / ') : '—'}</span>
             </div>
           </div>
           <div className="flex gap-6 text-right">
             <div>
-              <div className="text-[11px] text-slate-500">{t('vd.promised')}</div>
-              <div className="num text-[22px] font-bold text-slate-100">{fmtTime(v.promisedAt)}</div>
+              <div className="text-[11px] text-[#22354d]0">{t('vd.promised')}</div>
+              <div className="num text-[22px] font-bold text-[#22354d]">{fmtTime(v.promisedAt)}</div>
             </div>
             <div>
-              <div className="text-[11px] text-slate-500">{t('vd.eta')}</div>
-              <div className={`num text-[22px] font-bold ${riskTone === 'bad' ? 'text-red-400' : riskTone === 'warn' ? 'text-amber-300' : 'text-emerald-300'}`}>
+              <div className="text-[11px] text-[#22354d]0">{t('vd.eta')}</div>
+              <div className={`num text-[22px] font-bold ${riskTone === 'bad' ? 'text-[#dc2626]' : riskTone === 'warn' ? 'text-[#b47207]' : 'text-[#15803d]'}`}>
                 {fmtTime(eta)}{diffMin > 0 && <span className="text-[12px] ml-1">+{fmtH(diffMin)}</span>}
               </div>
             </div>
             <div>
-              <div className="text-[11px] text-slate-500">{t('vd.onSiteFor')}</div>
-              <div className="num text-[22px] font-bold text-sky-300">{fmtH(elapsedMin)}</div>
+              <div className="text-[11px] text-[#22354d]0">{t('vd.onSiteFor')}</div>
+              <div className="num text-[22px] font-bold text-[#128984]">{fmtH(elapsedMin)}</div>
             </div>
           </div>
         </div>
         <div className="mt-4">
-          <div className="flex items-center justify-between text-[12px] text-slate-400 mb-1.5">
+          <div className="flex items-center justify-between text-[12px] text-[#64748b] mb-1.5">
             <span>{t('vd.totalProgress')}</span>
-            <span className={`num ${over ? 'text-red-400 font-bold' : ''}`}>
+            <span className={`num ${over ? 'text-[#dc2626] font-bold' : ''}`}>
               {Math.round(pct)}% · {fmtH(usedMin)} / {fmtH(v.targetMin)}{over && ` ⚠ ${t('vd.overTargetWarn')}`}
             </span>
           </div>
@@ -104,29 +104,29 @@ export default function VehicleDetail() {
         <Panel className="xl:col-span-2">
           <SectionTitle>{t('vd.timeline')}</SectionTitle>
           <div className="relative pl-6">
-            <div className="absolute left-[7px] top-1 bottom-1 w-px bg-[#1e2b47]" />
+            <div className="absolute left-[7px] top-1 bottom-1 w-px bg-[#dfe6ee]" />
             <div className="flex flex-col gap-4">
               {v.events.map((e, i) => (
                 <div key={i} className="relative">
                   <span className={`absolute -left-6 top-0.5 w-[15px] h-[15px] rounded-full border-2 flex items-center justify-center text-[9px]
-                    ${e.severity === 'bad' ? 'border-red-400 bg-red-400/20' : e.severity === 'warn' ? 'border-amber-400 bg-amber-400/20' : 'border-sky-400 bg-sky-400/20'}`} />
+                    ${e.severity === 'bad' ? 'border-[#dc2626] bg-[#dc2626]/15' : e.severity === 'warn' ? 'border-[#ed9f18] bg-[#ed9f18]/20' : 'border-[#128984] bg-[#128984]/15'}`} />
                   <div className="flex items-baseline gap-3 flex-wrap">
-                    <span className="num text-[13px] text-slate-500 w-[42px]">{fmtTime(e.t)}</span>
+                    <span className="num text-[13px] text-[#22354d]0 w-[42px]">{fmtTime(e.t)}</span>
                     <span className="text-[14px]">{EV_ICON[e.type]}</span>
-                    <span className={`text-[14px] font-medium ${e.severity === 'bad' ? 'text-red-300' : e.severity === 'warn' ? 'text-amber-300' : 'text-slate-200'}`}>
+                    <span className={`text-[14px] font-medium ${e.severity === 'bad' ? 'text-[#dc2626]' : e.severity === 'warn' ? 'text-[#b47207]' : 'text-[#22354d]'}`}>
                       {t(`ev.${e.type}` as any)}
                     </span>
-                    {e.note && <span className="text-[12px] text-slate-400">{e.note}</span>}
+                    {e.note && <span className="text-[12px] text-[#64748b]">{e.note}</span>}
                   </div>
                   {e.evidence && (
                     <div className="ml-[54px] mt-1 flex gap-1.5 flex-wrap">
                       {e.evidence.map((ev, j) => (
-                        <span key={j} className="text-[10px] px-1.5 py-0.5 rounded border border-[#2a3a5c] text-slate-400 cursor-pointer hover:border-sky-400/50 hover:text-sky-300">📎 {ev}</span>
+                        <span key={j} className="text-[10px] px-1.5 py-0.5 rounded border border-[#d4dde8] text-[#64748b] cursor-pointer hover:border-[#128984]/50 hover:text-[#128984]">📎 {ev}</span>
                       ))}
                     </div>
                   )}
                   {e.type === 'resume' && v.pauses.length > 0 && (
-                    <div className="ml-[54px] mt-1.5 text-[11px] text-amber-300/90 bg-amber-400/5 border border-amber-400/20 rounded px-2 py-1">
+                    <div className="ml-[54px] mt-1.5 text-[11px] text-[#b47207]/90 bg-[#ed9f18]/5 border border-[#ed9f18]/20 rounded px-2 py-1">
                       ↑ {t('vd.waitLoss')} {fmtH(v.waitMin)} · {t('vd.rcaAuto')}
                     </div>
                   )}
@@ -134,12 +134,12 @@ export default function VehicleDetail() {
               ))}
               {!v.exitAt && (
                 <div className="relative">
-                  <span className="absolute -left-6 top-0.5 w-[15px] h-[15px] rounded-full border-2 border-emerald-400 bg-emerald-400/20 live-dot" />
+                  <span className="absolute -left-6 top-0.5 w-[15px] h-[15px] rounded-full border-2 border-[#16a34a] bg-[#16a34a]/15 live-dot" />
                   <div className="flex items-baseline gap-3">
-                    <span className="num text-[13px] text-slate-500 w-[42px]">{fmtTime(NOW)}</span>
-                    <span className="text-[14px] text-emerald-300">{t(`state.${v.status}` as any)}…</span>
+                    <span className="num text-[13px] text-[#22354d]0 w-[42px]">{fmtTime(NOW)}</span>
+                    <span className="text-[14px] text-[#15803d]">{t(`state.${v.status}` as any)}…</span>
                     {v.activityRate !== undefined && v.activityRate > 0 && (
-                      <span className="text-[12px] text-slate-400">{t('vd.activity')} {v.activityRate}%（{t('vd.baseline')} 80%）</span>
+                      <span className="text-[12px] text-[#64748b]">{t('vd.activity')} {v.activityRate}%（{t('vd.baseline')} 80%）</span>
                     )}
                   </div>
                 </div>
@@ -156,14 +156,14 @@ export default function VehicleDetail() {
           </Panel>
           <Panel>
             <SectionTitle>{t('vd.evidence')}</SectionTitle>
-            <div className="flex flex-col gap-2 text-[12px] text-slate-300">
-              <div className="flex justify-between border-b border-[#16213a] pb-2"><span>📷 {t('vd.evidenceItems.cam')}</span><span className="text-slate-500 num">CAM-01 · {fmtTime(v.entryAt)}</span></div>
-              <div className="flex justify-between border-b border-[#16213a] pb-2"><span>🔢 {t('vd.evidenceItems.conf')}</span><span className="num text-emerald-300">{v.plateConfidence ?? 96}%</span></div>
+            <div className="flex flex-col gap-2 text-[12px] text-[#3d5170]">
+              <div className="flex justify-between border-b border-[#e2e8f0] pb-2"><span>📷 {t('vd.evidenceItems.cam')}</span><span className="text-[#22354d]0 num">CAM-01 · {fmtTime(v.entryAt)}</span></div>
+              <div className="flex justify-between border-b border-[#e2e8f0] pb-2"><span>🔢 {t('vd.evidenceItems.conf')}</span><span className="num text-[#15803d]">{v.plateConfidence ?? 96}%</span></div>
               {v.pauses.some((p) => p.partNo) && (
-                <div className="flex justify-between"><span>📦 {t('vd.evidenceItems.wms')}</span><span className="text-slate-500">{v.pauses.find((p) => p.partNo)?.partNo}</span></div>
+                <div className="flex justify-between"><span>📦 {t('vd.evidenceItems.wms')}</span><span className="text-[#22354d]0">{v.pauses.find((p) => p.partNo)?.partNo}</span></div>
               )}
               {v.assignAt && (
-                <div className="flex justify-between pt-1"><span>⏱ {t('vd.respTime')}</span><span className="num text-sky-300">{Math.round((v.assignAt.getTime() - v.entryAt.getTime()) / 60000)}min（{t('vd.teamAvg')} 9min）</span></div>
+                <div className="flex justify-between pt-1"><span>⏱ {t('vd.respTime')}</span><span className="num text-[#128984]">{Math.round((v.assignAt.getTime() - v.entryAt.getTime()) / 60000)}min（{t('vd.teamAvg')} 9min）</span></div>
               )}
             </div>
           </Panel>

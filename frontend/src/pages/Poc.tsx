@@ -27,11 +27,11 @@ export default function Poc() {
 
   return (
     <div className="flex flex-col gap-4">
-      <Panel className="border-sky-400/25 bg-gradient-to-r from-sky-400/[0.08] via-[#0b1222] to-[#0b1222]">
+      <Panel className="border-[#128984]/25 bg-gradient-to-r from-[#128984]/[0.06] via-white to-white">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <div className="text-[24px] font-bold text-slate-100">{t('poc.title')}</div>
-            <div className="text-[13px] text-slate-400 mt-1">{t('poc.subtitle')}</div>
+            <div className="text-[24px] font-bold text-[#22354d]">{t('poc.title')}</div>
+            <div className="text-[13px] text-[#64748b] mt-1">{t('poc.subtitle')}</div>
           </div>
           <Pill tone="accent">{t('poc.header.badge')}</Pill>
         </div>
@@ -41,12 +41,12 @@ export default function Poc() {
         <Panel className="xl:col-span-8 p-0 overflow-hidden">
           <div className="p-4 pb-3">
             <SectionTitle>{t('poc.dataLineage')}</SectionTitle>
-            <div className="text-[12px] text-slate-500">{t('poc.dataLineageIntro')}</div>
+            <div className="text-[12px] text-[#22354d]0">{t('poc.dataLineageIntro')}</div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left border-collapse">
               <thead>
-                <tr className="border-y border-[#1e2b47] bg-[#0b1222] text-[11px] uppercase tracking-wide text-slate-500">
+                <tr className="border-y border-[#dfe6ee] bg-[#eef2f7] text-[11px] uppercase tracking-wide text-[#22354d]0">
                   <th className="px-4 py-2.5 font-medium">{t('poc.column.metric')}</th>
                   <th className="px-4 py-2.5 font-medium">{t('poc.column.source')}</th>
                   <th className="px-4 py-2.5 font-medium">{t('poc.column.current')}</th>
@@ -55,14 +55,14 @@ export default function Poc() {
               </thead>
               <tbody>
                 {lineageRows.map((row) => (
-                  <tr key={row.metric} className="border-b border-[#16223a] last:border-0 align-top">
-                    <td className="px-4 py-3 text-[13px] text-slate-200">{t(row.metric)}</td>
-                    <td className="px-4 py-3 text-[12px] leading-5 text-slate-400">{t(row.source)}</td>
+                  <tr key={row.metric} className="border-b border-[#e2e8f0] last:border-0 align-top">
+                    <td className="px-4 py-3 text-[13px] text-[#22354d]">{t(row.metric)}</td>
+                    <td className="px-4 py-3 text-[12px] leading-5 text-[#64748b]">{t(row.source)}</td>
                     <td className="px-4 py-3 whitespace-nowrap">
-                      <span className="num text-[19px] font-bold text-sky-300">{row.value}</span>
-                      <span className="ml-1 text-[11px] text-slate-500">{t(row.unit)}</span>
+                      <span className="num text-[19px] font-bold text-[#128984]">{row.value}</span>
+                      <span className="ml-1 text-[11px] text-[#22354d]0">{t(row.unit)}</span>
                     </td>
-                    <td className="px-4 py-3 text-[12px] leading-5 text-emerald-300/80">{t(row.evidence)}</td>
+                    <td className="px-4 py-3 text-[12px] leading-5 text-[#15803d]/80">{t(row.evidence)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -70,18 +70,18 @@ export default function Poc() {
           </div>
         </Panel>
 
-        <Panel className="xl:col-span-4 border-amber-400/20 bg-amber-400/[0.03]">
+        <Panel className="xl:col-span-4 border-[#ed9f18]/20 bg-[#ed9f18]/[0.04]">
           <SectionTitle right={<Pill tone="accent">{t('poc.roi.badge')}</Pill>}>{t('poc.roi.title')}</SectionTitle>
-          <div className="num text-[38px] font-bold text-amber-300 leading-none mt-5">
-            {roi.targetLow.toLocaleString('zh-CN')}–{roi.targetHigh.toLocaleString('zh-CN')}<span className="text-[14px] font-normal text-slate-500 ml-1">{t('poc.unit.yuan')}</span>
+          <div className="num text-[38px] font-bold text-[#b47207] leading-none mt-5">
+            {roi.targetLow.toLocaleString('zh-CN')}–{roi.targetHigh.toLocaleString('zh-CN')}<span className="text-[14px] font-normal text-[#22354d]0 ml-1">{t('poc.unit.yuan')}</span>
           </div>
-          <div className="text-[12px] text-slate-400 mt-3">{t('poc.roi.body')}</div>
-          <div className="flex items-center gap-2 mt-5 text-[12px] text-slate-500">
-            <span className="w-2 h-2 rounded-full bg-amber-400" />
+          <div className="text-[12px] text-[#64748b] mt-3">{t('poc.roi.body')}</div>
+          <div className="flex items-center gap-2 mt-5 text-[12px] text-[#22354d]0">
+            <span className="w-2 h-2 rounded-full bg-[#ed9f18]" />
             <span>{t('poc.metric.waitLoss')} {roi.weekLoss.toLocaleString('zh-CN')} {t('poc.unit.yuan')}</span>
           </div>
-          <div className="flex items-center gap-2 mt-2 text-[12px] text-slate-500">
-            <span className="w-2 h-2 rounded-full bg-sky-400" />
+          <div className="flex items-center gap-2 mt-2 text-[12px] text-[#22354d]0">
+            <span className="w-2 h-2 rounded-full bg-[#128984]" />
             <span>{t('poc.roi.intervenable')} {roi.intervenableLoss.toLocaleString('zh-CN')} {t('poc.unit.yuan')}</span>
           </div>
         </Panel>
@@ -90,41 +90,41 @@ export default function Poc() {
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
         <Panel className="xl:col-span-7">
           <SectionTitle right={<Pill tone="accent">{t('poc.acceptance.status')}</Pill>}>{t('poc.acceptance.title')}</SectionTitle>
-          <div className="text-[12px] text-slate-400 mb-4">{t('poc.acceptance.intro')}</div>
+          <div className="text-[12px] text-[#64748b] mb-4">{t('poc.acceptance.intro')}</div>
           <div className="flex flex-wrap gap-2 mb-4">
             <Pill tone="accent">{t('poc.acceptance.period')}</Pill>
             <Pill tone="accent">{t('poc.acceptance.site')}</Pill>
           </div>
-          <div className="rounded-lg border border-[#1e2b47] overflow-hidden">
-            <div className="grid grid-cols-[1fr_auto_auto] gap-3 px-3 py-2 bg-[#0b1222] text-[11px] text-slate-500">
+          <div className="rounded-lg border border-[#dfe6ee] overflow-hidden">
+            <div className="grid grid-cols-[1fr_auto_auto] gap-3 px-3 py-2 bg-[#eef2f7] text-[11px] text-[#22354d]0">
               <span>{t('poc.acceptance.metric')}</span>
               <span>{t('poc.acceptance.threshold')}</span>
               <span>{t('poc.acceptance.defCol')}</span>
             </div>
             {acceptanceRows.map((row) => (
-              <div key={row.label} className="grid grid-cols-[1fr_auto_auto] items-center gap-3 px-3 py-3 border-t border-[#16223a]">
-                <span className="text-[13px] text-slate-200">{t(row.label)}</span>
-                <span className="num text-[18px] font-bold text-emerald-300">{t(row.target)}</span>
-                <span className="text-[11px] leading-4 text-slate-500 text-right max-w-[200px]">{t(row.def)}</span>
+              <div key={row.label} className="grid grid-cols-[1fr_auto_auto] items-center gap-3 px-3 py-3 border-t border-[#e2e8f0]">
+                <span className="text-[13px] text-[#22354d]">{t(row.label)}</span>
+                <span className="num text-[18px] font-bold text-[#15803d]">{t(row.target)}</span>
+                <span className="text-[11px] leading-4 text-[#22354d]0 text-right max-w-[200px]">{t(row.def)}</span>
               </div>
             ))}
           </div>
-          <div className="mt-4 text-[12px] leading-5 text-sky-200/80">{t('poc.acceptance.definition')}</div>
+          <div className="mt-4 text-[12px] leading-5 text-[#128984]">{t('poc.acceptance.definition')}</div>
         </Panel>
 
         <Panel className="xl:col-span-5">
           <SectionTitle right={<Pill tone="dim">{t('poc.roadmap.badge')}</Pill>}>{t('poc.roadmap.title')}</SectionTitle>
-          <div className="flex flex-col gap-3 text-[13px] text-slate-300">
-            <div className="flex items-center gap-2"><span className="text-sky-400">◆</span><span>{t('poc.roadmap.item.badge')}</span></div>
-            <div className="flex items-center gap-2"><span className="text-sky-400">◆</span><span>{t('poc.roadmap.item.attendance')}</span></div>
-            <div className="flex items-center gap-2"><span className="text-sky-400">◆</span><span>{t('poc.roadmap.item.hours')}</span></div>
-            <div className="flex items-center gap-2"><span className="text-sky-400">◆</span><span>{t('poc.roadmap.item.ranking')}</span></div>
+          <div className="flex flex-col gap-3 text-[13px] text-[#3d5170]">
+            <div className="flex items-center gap-2"><span className="text-[#128984]">◆</span><span>{t('poc.roadmap.item.badge')}</span></div>
+            <div className="flex items-center gap-2"><span className="text-[#128984]">◆</span><span>{t('poc.roadmap.item.attendance')}</span></div>
+            <div className="flex items-center gap-2"><span className="text-[#128984]">◆</span><span>{t('poc.roadmap.item.hours')}</span></div>
+            <div className="flex items-center gap-2"><span className="text-[#128984]">◆</span><span>{t('poc.roadmap.item.ranking')}</span></div>
           </div>
-          <div className="mt-5 rounded-lg border border-slate-500/20 bg-slate-500/[0.06] px-3 py-3 text-[12px] leading-5 text-slate-400">{t('poc.roadmap.compliance')}</div>
+          <div className="mt-5 rounded-lg border border-[#94a3b8]/30 bg-[#94a3b8]/[0.08] px-3 py-3 text-[12px] leading-5 text-[#64748b]">{t('poc.roadmap.compliance')}</div>
         </Panel>
       </div>
 
-      <div className="text-[11px] leading-5 text-slate-600 px-1">{t('poc.footer')}</div>
+      <div className="text-[11px] leading-5 text-[#94a3b8] px-1">{t('poc.footer')}</div>
     </div>
   );
 }

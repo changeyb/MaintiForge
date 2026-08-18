@@ -23,7 +23,7 @@ function Clock() {
   const d = NOW;
   const wd = lang === 'zh' ? `周${WEEKDAYS_ZH[d.getDay()]}` : WEEKDAYS_EN[d.getDay()];
   return (
-    <span className="num text-slate-300 text-[13px]">
+    <span className="num text-white/70 text-[13px] whitespace-nowrap">
       {d.getFullYear()}-{String(d.getMonth() + 1).padStart(2, '0')}-{String(d.getDate()).padStart(2, '0')} {wd}{' '}
       {String(d.getHours()).padStart(2, '0')}:{String(d.getMinutes()).padStart(2, '0')}
     </span>
@@ -43,13 +43,13 @@ export default function App() {
   const { t, lang, setLang } = useLang();
   return (
     <div className="min-h-full flex flex-col">
-      <header className="sticky top-0 z-40 border-b border-[#1e2b47] bg-[#070b16]/90 backdrop-blur">
+      <header className="sticky top-0 z-40 bg-primary shadow-[0_2px_12px_rgba(22,48,77,.25)]">
         <div className="max-w-[1500px] mx-auto px-5 h-[60px] flex items-center gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-[15px] font-black text-white">K</div>
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-teal to-primary-deep flex items-center justify-center text-[15px] font-black text-white">K</div>
             <div>
-              <div className="text-[14px] font-bold leading-tight">{t('app.title')}</div>
-              <div className="text-[10px] text-slate-500 leading-tight">{t('app.subtitle')}</div>
+              <div className="text-[14px] font-bold leading-tight text-white whitespace-nowrap">{t('app.title')}</div>
+              <div className="text-[10px] text-white/50 leading-tight whitespace-nowrap">{t('app.subtitle')}</div>
             </div>
           </div>
           <nav className="flex items-center gap-1 ml-4">
@@ -59,8 +59,8 @@ export default function App() {
                 to={n.to}
                 end={'end' in n}
                 className={({ isActive }) =>
-                  `px-3.5 py-1.5 rounded-md text-[13px] transition-colors ${
-                    isActive ? 'bg-sky-400/15 text-sky-300 font-semibold' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                  `px-3.5 py-1.5 rounded-md text-[13px] whitespace-nowrap transition-colors ${
+                    isActive ? 'bg-white/15 text-white font-semibold' : 'text-white/60 hover:text-white hover:bg-white/10'
                   }`
                 }
               >
@@ -70,20 +70,20 @@ export default function App() {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-4">
-            <span className="flex items-center gap-1.5 text-[11px] text-emerald-400">
+            <span className="flex items-center gap-1.5 text-[11px] text-emerald-300 whitespace-nowrap">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 live-dot" />
               LIVE · {t('common.mockNotice')}
             </span>
             <Clock />
             <button
               onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')}
-              className="px-2.5 py-1 rounded border border-[#2a3a5c] text-[12px] text-slate-300 hover:border-sky-400/50 hover:text-sky-300 transition-colors"
+              className="px-2.5 py-1 rounded border border-white/25 text-[12px] text-white/80 hover:border-white/60 hover:text-white transition-colors"
             >
               {t('common.lang')}
             </button>
             <button
               onClick={() => (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen())}
-              className="px-2.5 py-1 rounded border border-[#2a3a5c] text-[12px] text-slate-300 hover:border-sky-400/50 hover:text-sky-300 transition-colors"
+              className="px-2.5 py-1 rounded border border-white/25 text-[12px] text-white/80 hover:border-white/60 hover:text-white transition-colors"
             >
               ⛶ {t('common.fullscreen')}
             </button>
